@@ -4,16 +4,11 @@ describe Upload do
 
   before(:each) do
     file = Rack::Test::UploadedFile.new("features/support/files/test.txt", "text/txt")
-    Upload.import(file)
-  end
-
-  after(:all) do
-    file = Rack::Test::UploadedFile.new("features/support/files/test.txt", "text/txt")
-    File.delete("public/uploads/lp_test.txt")
+    @file = Upload.import(file)
   end
 
   it "should return content" do
-    content = Upload.content
+    content = @file
     content.should_not be_nil
     content.should include File.read("features/support/files/test.txt")
   end
