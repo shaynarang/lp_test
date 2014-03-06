@@ -17,9 +17,9 @@ class UploadsController < ApplicationController
       @upload = Upload.new
       @upload.file = params[:file]
       if @upload.save
-        redirect_to upload_path(@upload), notice: "File imported."
+        redirect_to upload_path(@upload)
       else
-        redirect_to root_path, notice: "Some went wrong. Please try again."
+        redirect_to root_path, notice: "Something went wrong. Please try again."
       end
     end
   end

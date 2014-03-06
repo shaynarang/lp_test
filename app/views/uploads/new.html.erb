@@ -1,5 +1,21 @@
-<h1>Upload Your File</h1>
+<h1>Lonely Planet File Uploader</h1>
+
+<p id="intro_text">
+  This application handles uploading and parsing of files in the following proprietary format. It accounts for additional spaces and new lines.
+</p>
+
+<p id="example_text">
+  [section name 1]</br>
+  key: value</br>
+  key2 : value</br></br>
+
+  [section name 2]</br>
+  key3: value that is too long for one line, so we wrap onto a second line</br>
+    and continue by using any whitespace character in the first column.
+</p>
+
 <div class="content">
+
   <%= form_tag uploads_path, multipart: true, :id => "upload_form" do %>
     <%= file_field_tag :file %>
     <%= submit_tag "Import" %>
