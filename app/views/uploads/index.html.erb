@@ -1,5 +1,8 @@
-<h1>Upload Your File</h1>
-<%= form_tag import_uploads_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
+<h1>Uploads</h1>
+<% @uploads.each do |upload| %>
+  <p id="upload_list_item">
+    <%= link_to upload.created_at.strftime("%-m/%-d/%Y"), upload_path(upload) %>
+  </p>
 <% end %>
+
+<p id="root_link"> <%= link_to "Upload Another File", root_path %> </p>
