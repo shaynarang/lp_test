@@ -2,13 +2,13 @@
 
 This application handles uploading and parsing of files in the following proprietary format. It accounts for additional spaces and new lines. It has been deployed to Heroku at http://lonelyplanettest.herokuapp.com/.
 
-[section name 1]
+"[section name 1]
 key: value
 key2 : value
 
 [section name 2]
 key3: value that is too long for one line, so we wrap onto a second line
-and continue by using any whitespace character in the first column.
+and continue by using any whitespace character in the first column."
 
 ## Purpose:
 
