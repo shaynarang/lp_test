@@ -1,0 +1,9 @@
+<h1>Upload Your File</h1>
+<div class="content">
+  <%= form_tag uploads_path, multipart: true, :id => "upload_form" do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</div>
+
+<p id="index_link"> <%= link_to "View All Uploads", uploads_path %> </p>

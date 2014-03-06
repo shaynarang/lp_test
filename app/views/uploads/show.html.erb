@@ -1,0 +1,15 @@
+<h1>Your Parsed File</h1>
+
+<div class="content">
+  <% @upload.properties.each do |section_title, key_value_pair| %>
+    <div id="section">
+      <p class="section_title"> [<%= section_title %>] </p>
+      <% hash_parser(key_value_pair).each do |key, value| %>
+        <p class="key_value_pair"> <%= key %>: <%= value %> </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<p id="index_link"> <%= link_to "View All Uploads", uploads_path %> </p>
+<p id="root_link"> <%= link_to "Upload Another File", root_path %> </p>
