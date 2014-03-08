@@ -4,17 +4,17 @@
 <li>This application handles uploading and parsing of files in a proprietary format</li>
 <li>The requirements are listed here: https://gist.github.com/jjbohn/29e17a0df5435047eea8</li>
 <li>The application has been deployed to Heroku here: http://lonelyplanettest.herokuapp.com/</li>
-</ol>
+</ul>
 
-## Purpose:
+##Purpose:
 
 Get a cool gig with a cool company.
 
-## Features:
+##Features:
 <ol>
 <li> User can upload text file</li>
-<li> User can view upload</li>
-<li> User can view all uploads</li>
+<li> User can view parsed text file</li>
+<li> User can view all parsed text files</li>
 </ol>
 
 ##To Do:
