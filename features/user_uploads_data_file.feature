@@ -16,5 +16,15 @@ Feature: User Uploads Data File
 
   Scenario: No File to Upload
   	When I press "Import"
-  	Then I should see "Please add a file to import."
+  	Then I should see "Please add a file to upload."
+
+  Scenario: Wrong File Type
+    When I attach "test.jpg" to "file"
+    And I press "Import"
+    Then I should see "Please upload a .txt or .rtf file."
+
+  Scenario: Wrong Text Format
+    When I attach "blank.rtf" to "file"
+    And I press "Import"
+    Then I should see "Please upload a properly formatted text file."
 

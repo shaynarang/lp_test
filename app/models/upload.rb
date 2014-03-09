@@ -8,16 +8,14 @@ class Upload < ActiveRecord::Base
   end
 
   def parse file
+    file.rewind
     self.content = file.read
-    if section_names.size == 0
-      raise TypeError, "This document does not meet the required format."
-    end
+    
     content_hash = {}
 
     sections.each do |section|
       content_hash[section_name(section)] = key_value_pairs(section)
-    end
-
+    end 
     content_hash
   end
 
@@ -31,7 +29,6 @@ class Upload < ActiveRecord::Base
       sections << content[section_indices[counter]...section_indices[counter + 1]]
       counter += 1
     end
-
     sections
   end
 

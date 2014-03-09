@@ -23,7 +23,6 @@ Get a cool gig with a cool company.
 <li> Add testing</li>
 <li> Set values of sections, keys, and values</li>
 <li> Save file to disk</li>
-<li> Error handling</li>
 <li> Style</li>
 </ol>
 

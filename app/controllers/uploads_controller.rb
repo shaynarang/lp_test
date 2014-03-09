@@ -12,15 +12,15 @@ class UploadsController < ApplicationController
 
   def create
     if params[:file].blank?
-      redirect_to root_path, notice: "Please add a file to import."
+      redirect_to root_path, notice: "Please add a file to upload."
+    elsif !params[:file].original_filename[/.(\.txt|\.rtf)$/i]
+      redirect_to root_path, notice: "Please upload a .txt or .rtf file."
+    elsif !params[:file].read.include?("["&&"]"&&":")
+      redirect_to root_path, notice: "Please upload a properly formatted text file."
     else
       @upload = Upload.new
       @upload.file = params[:file]
-      if @upload.save
-        redirect_to upload_path(@upload)
-      else
-        redirect_to root_path, notice: "Something went wrong. Please try again."
-      end
+      @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to root_path, notice: "Something went wrong.")
     end
   end
 
