@@ -26,7 +26,7 @@ h1 {
   font-size: 120%;
 }
 
-.parsed_file {
+.edit_file, .parsed_file {
   margin: 0 12% 4% 12%;
   font-size: 120%;
   border: 3px solid black;
@@ -45,13 +45,13 @@ h1 {
   font-size: 150%;
 }
 
-#index_link {
+#upload_link {
   margin-top: 4%;
   text-align: center;
   font-size: 150%;
 }
 
- #root_link {
+ #index_link, #root_link, #delete_link {
   text-align: center;
   font-size: 150%;
  }

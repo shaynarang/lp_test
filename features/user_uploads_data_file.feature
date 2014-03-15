@@ -4,7 +4,7 @@ Feature: User Uploads Data File
   I want to upload my data file
 
   Background:
-  	Given I am on the home page
+    Given I am on the home page
 
   Scenario: Happy Path
     Then I should see "Lonely Planet File Uploader"
@@ -15,8 +15,8 @@ Feature: User Uploads Data File
     And I should not see "Something went wrong. Please try again."
 
   Scenario: No File to Upload
-  	When I press "Import"
-  	Then I should see "Please add a file to upload."
+    When I press "Import"
+    Then I should see "Please add a file to upload."
 
   Scenario: Wrong File Type
     When I attach "test.jpg" to "file"

@@ -1,0 +1,15 @@
+<h1>Update your File</h1>
+
+<div class="edit_file">
+  <%= form_for @upload do |f| %>
+    <div id="section">
+      <%= f.fields_for :sections do |section| %>
+        <p> <%= section.text_field :title %> </p>
+        <%= section.fields_for :key_value_pairs do |key_value_pair| %>
+        <p> <%= key_value_pair.text_field :pair %> </p>
+        <% end %>
+      <% end %>
+      <p> <%= f.submit "Update" %> </p>
+    </div>
+  <% end %>
+</div>

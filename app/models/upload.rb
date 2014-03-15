@@ -1,25 +1,33 @@
 class Upload < ActiveRecord::Base
-  before_validation :set_properties
+  before_create :read_file
+
   attr_accessor :file
   attr_accessor :content
 
-  def set_properties
-    self.properties = parse(self.file)
-  end
+  has_many :sections, :dependent => :destroy
+  accepts_nested_attributes_for :sections
+  has_many :key_value_pairs, :through => :sections
+  accepts_nested_attributes_for :key_value_pairs
+  default_scope { order :id }
 
-  def parse file
+  def read_file
     file.rewind
     self.content = file.read
-    
-    content_hash = {}
-
-    sections.each do |section|
-      content_hash[section_name(section)] = key_value_pairs(section)
-    end 
-    content_hash
+    set_properties(self.file)
   end
 
-  def sections
+  def set_properties file
+    self.file_name = file.inspect.scan(/[\w-]+/)[-2]
+
+    all_sections.each do |single_section|
+      title = section_name(single_section)
+      section = self.sections.build(title: title)
+      pair = key_value_pairs(single_section)
+      section.key_value_pairs.build(pair: pair)
+    end
+  end
+
+  def all_sections
     section_indices = section_names.map { |section_name| content.index(section_name) }
     section_indices << -1
 
