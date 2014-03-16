@@ -4,10 +4,14 @@
   <%= form_for @upload do |f| %>
     <div id="section">
       <%= f.fields_for :sections do |section| %>
-        <p> <%= section.text_field :title %> </p>
-        <%= section.fields_for :key_value_pairs do |key_value_pair| %>
-        <p> <%= key_value_pair.text_field :pair %> </p>
+        <p> <%= "Section Title" %>: <%= section.text_field :title %> </p>
+        <%= section.fields_for :keys do |key| %>
+          <p> <%= "Key Title" %>: <%= key.text_field :title %> </p>
+          <%= key.fields_for :values do |value| %>
+            <p> <%= "Value Content" %>: <%= value.text_field :content %> </p>
+          <% end %>
         <% end %>
+        <hr>
       <% end %>
       <p> <%= f.submit "Update" %> </p>
     </div>

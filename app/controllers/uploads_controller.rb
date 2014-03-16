@@ -14,7 +14,7 @@ class UploadsController < ApplicationController
   def update
     @upload = Upload.find(params[:id])
     @upload.update(upload_params)
-    @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to upload_path(@upload), notice: "Something went wrong.")
+    @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to upload_path(@upload), notice: "Something went wrong. Please try again.")
   end
 
   def new
@@ -30,20 +30,20 @@ class UploadsController < ApplicationController
     else
       @upload = Upload.new
       @upload.file = params[:file]
-      @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to root_path, notice: "Something went wrong.")
+      @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to root_path, notice: "Something went wrong. Please try again.")
     end
   end
 
   def destroy
     @upload = Upload.find(params[:id])
     @upload.delete
-    redirect_to root_path
+    redirect_to uploads_path
   end
 
   private
 
     def upload_params
-      params.require(:upload).permit(:id, :file_name, :sections_attributes => [ :id, :title, :key_value_pairs_attributes => [:id, :pair] ])
+      params.require(:upload).permit(:id, :file_name, :sections_attributes => [ :id, :title, :keys_attributes => [ :id, :title, :values_attributes => [ :id, :content] ] ])
     end
 
 end

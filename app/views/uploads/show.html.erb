@@ -4,9 +4,8 @@
   <% @upload.sections.each do |section| %>
     <div id="section">
         <p class="section_title"> [<%= section.title %>] </p>
-        <% section.key_value_pairs.first.pair.each do |pair|%>
-          <% key,value = pair %>
-          <p> <%= key %>: <%= value %> </p>
+        <% section.keys.each do |key|%>
+          <p> <%= key.title %>: <%= key.values.first.content %> </p>
         <% end %>
     </div>
   <% end %>
