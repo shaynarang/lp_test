@@ -22,7 +22,7 @@ class Upload < ActiveRecord::Base
   end
 
   def set_properties file
-    self.file_name = file.original_filename
+    self.file_name = file.original_filename.split(".")[0]
 
     all_sections.each do |single_section|
       title = section_name(single_section)
