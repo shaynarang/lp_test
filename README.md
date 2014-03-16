@@ -14,21 +14,20 @@ Get a cool gig with a cool company.
 <ol>
 <li> User can upload text file</li>
 <li> User can view parsed text file</li>
-<li> User can view all parsed text files</li>
+<li> User can edit parsed text file</li>
+<li> User can download text file</li>
+<li> User can view all text files</li>
 </ol>
 
 ##To Do:
 
 <ol>
-<li> Add testing</li>
-<li> Set values of sections, keys, and values</li>
-<li> Save file to disk</li>
-<li> Style</li>
+<li> Refactor</li>
 </ol>
 
 ##Project Status:
 
-As of March 6th, 2014, this application successfully uploads a text file and parses it.
+As of March 16th, 2014, this application successfully allows a user to upload a text file, view the parsed file, edit the parsed file, and download the text file.
 
 ##Author:
 
