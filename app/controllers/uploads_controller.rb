@@ -40,6 +40,12 @@ class UploadsController < ApplicationController
     redirect_to uploads_path
   end
 
+  def download
+    @upload = Upload.find(params[:id])
+    upload_string = render_to_string(partial: "upload")
+    send_data(Upload.format_for_download(upload_string), filename: "#{@upload.file_name_without_ext}.txt", type: "text/plain")
+  end
+
   private
 
     def upload_params

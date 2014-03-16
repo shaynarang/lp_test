@@ -22,3 +22,11 @@ end
 Then(/^I should see the file input "(.*?)"$/) do |field_id|
   page.should have_css("input[type='file'][id='#{field_id}']")
 end
+
+When(/^I fill in "(.*?)" for "(.*?)"$/) do |content, field_id|
+  page.fill_in field_id, with: content
+end
+
+When(/^I confirm the dialogue$/) do
+  page.driver.browser.switch_to.alert.accept
+end

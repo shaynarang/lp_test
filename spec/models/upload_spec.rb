@@ -44,5 +44,34 @@ describe Upload do
     text = "Lon[ely Planet    progra]]mming test "
     @upload.format_text(text).should == "Lonely Planet programming test"
   end
+
+  it "should return a filename without extension" do
+    @upload.file_name_without_ext.should == "test"
+  end
+
+  it "should format for download" do
+    upload_string =
+    '<div class="parsed_file">
+      <div id="section">
+        <p class="section_title"> [header] </p>
+          <p> project: Programming Test </p>
+          <p> budget: 4.5 </p>
+          <p> accessed: 205 </p>
+      </div>
+      <div id="section">
+        <p class="section_title"> [meta data] </p>
+          <p> description: This is a tediously long description of the Lonely Planet programming test that you are taking. Tedious isn&#39;t the right word, but it&#39;s the first word that comes to mind. </p>
+          <p> correction text: I meant &#39;moderately,&#39; not &#39;tediously,&#39; above. </p>
+      </div>
+      <div id="section">
+        <p class="section_title"> [trailer] </p>
+          <p> budget: all out of budget. </p>
+      </div>
+    </div>'
+    tags = ['<div>', '</div>', '&quot;', '<div class="parsed_file">', '<div id="section">', '<p>', '</p>', '&#39;']
+    tags.each do |tag|
+      Upload.format_for_download(upload_string).should_not include tag
+    end
+  end
     
 end

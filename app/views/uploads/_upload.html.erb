@@ -1,0 +1,10 @@
+<div class="parsed_file">
+  <% @upload.sections.each do |section| %>
+    <div id="section">
+        <p class="section_title"> [<%= section.title %>] </p>
+        <% section.keys.each do |key|%>
+          <p> <%= key.title %>: <%= key.values.first.content %> </p>
+        <% end %>
+    </div>
+  <% end %>
+</div>

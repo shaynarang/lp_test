@@ -1,19 +1,19 @@
+include ActionView::Helpers::SanitizeHelper
+
 class Upload < ActiveRecord::Base
   before_create :read_file
 
   attr_accessor :file
   attr_accessor :content
 
-  has_many :sections, :dependent => :destroy
+  has_many :sections, -> { order(:id => :asc) }, :dependent => :destroy
   accepts_nested_attributes_for :sections
 
-  has_many :keys, :through => :sections
+  has_many :keys, -> { order(:id => :asc) }, :through => :sections
   accepts_nested_attributes_for :keys
 
-  has_many :values, :through => :keys
+  has_many :values, -> { order(:id => :asc) }, :through => :keys
   accepts_nested_attributes_for :values
-
-  default_scope { order :id }
 
   def read_file
     file.rewind
@@ -27,10 +27,8 @@ class Upload < ActiveRecord::Base
     all_sections.each do |single_section|
       title = section_name(single_section)
       section = self.sections.build(title: title)
-      pairs = key_value_pairs(single_section)
-      pairs.each do |pair|
-        title = pair[0]
-        content = pair[1]
+      key_value_pairs(single_section).each do |pair|
+        title,content = pair[0],pair[1]
         key = section.keys.build(title: title)
         key.values.build(content: content)
       end
@@ -75,6 +73,15 @@ class Upload < ActiveRecord::Base
 
   def format_text text
     text.gsub(/[\[\]\/\\]/, "").squish.strip
+  end
+
+  def file_name_without_ext
+    file_name.split(".")[0]
+  end
+
+  def self.format_for_download upload_string
+    upload_string.gsub!("</p>", "</p>\n")
+    CGI.unescapeHTML(strip_tags(upload_string))
   end
 
 end
