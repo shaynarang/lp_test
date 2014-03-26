@@ -18,6 +18,8 @@ class Upload < ActiveRecord::Base
   def read_file
     file.rewind
     self.content = file.read
+    raise "Section Name Error" if duplicate_section_names?
+    raise "Key Name Error" if duplicate_key_names?
     set_properties(self.file)
   end
 
@@ -56,6 +58,12 @@ class Upload < ActiveRecord::Base
     format_text(section[/\[.*?\]/])
   end
 
+  def duplicate_section_names?
+    names = section_names
+    names.map! {|name| format_text(name)}
+    names != names.uniq
+  end
+
   def key_value_pairs section
     pairs = {}
     section = remove_slashes(section)
@@ -65,6 +73,21 @@ class Upload < ActiveRecord::Base
       pairs[format_text(chunk[0])] = format_text(chunk[1])
     end
     pairs
+  end
+
+  def duplicate_key_names?
+    key_groups = []
+
+    all_sections.each do |section|
+      key_groups << section.scan(/(.+):/).flatten
+    end
+
+    key_groups.each do |group|
+      group.map! {|name| format_text(name)}
+      return true if group != group.uniq
+    end
+
+    false
   end
 
   def remove_slashes section

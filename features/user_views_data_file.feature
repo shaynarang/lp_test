@@ -19,4 +19,4 @@ Feature: User Views Data File
     And I should see "budget"
     And I should see "all out of budget."
     When I click "View All Uploads"
-    Then I should see "test.txt"
+    Then I should see "test"

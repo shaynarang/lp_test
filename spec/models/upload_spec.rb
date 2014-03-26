@@ -73,5 +73,13 @@ describe Upload do
       Upload.format_for_download(upload_string).should_not include tag
     end
   end
+
+  it "should check for duplicate section names" do
+    @upload.duplicate_section_names?.should == false
+  end
+
+  it "should check for duplicate key names" do
+    @upload.duplicate_key_names?.should == false
+  end
     
 end

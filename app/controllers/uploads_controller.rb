@@ -21,17 +21,12 @@ class UploadsController < ApplicationController
   end
 
   def create
-    if params[:file].blank?
-      redirect_to root_path, notice: "Please add a file to upload."
-    elsif !params[:file].original_filename[/.(\.txt|\.rtf)$/i]
-      redirect_to root_path, notice: "Please upload a .txt or .rtf file."
-    elsif !params[:file].read.include?("["&&"]"&&":")
-      redirect_to root_path, notice: "Please upload a properly formatted text file."
-    else
-      @upload = Upload.new
-      @upload.file = params[:file]
-      @upload.save ? (redirect_to upload_path(@upload)) : (redirect_to root_path, notice: "Something went wrong. Please try again.")
-    end
+    raise "File Existence Error" if params[:file].blank?
+    raise "File Type Error" if !params[:file].original_filename[/.(\.txt|\.rtf)$/i]
+    raise "File Format Error" if !params[:file].read.include?("["&&"]"&&":")
+    @upload = Upload.new
+    @upload.file = params[:file]
+    @upload.save ? (redirect_to upload_path(@upload)) : (raise "General Error")
   end
 
   def destroy

@@ -28,3 +28,13 @@ Feature: User Uploads Data File
     And I press "Import"
     Then I should see "Please upload a properly formatted text file."
 
+  Scenario: Section Name Error
+    When I attach "section_name.rtf" to "file"
+    And I press "Import"
+    Then I should see "Duplicate section names are not permitted."
+
+  Scenario: Key Name Error
+    When I attach "key_name.txt" to "file"
+    And I press "Import"
+    Then I should see "Duplicate key names for each section are not permitted."
+
